@@ -1,0 +1,18 @@
+{
+    "contents" : "# Predicting Defaulters\n\nThis Shiny App allows for a simple data exploration of the \"Default\" data set in the ISLR package. This data set contains simulated data regarding on the defaults for credit card debt.\n\nThe \"Data\" panel showcases the available variables and data entries.\n\nThe \"Histogram\" panel allows for simple histogram plots on numeric variables in the data set.\n\nThe \"Model\" panel allows the user to partition the data, choose the variables, run the logistic regression model and displays model metrics.\n\nThis app was developed for the Coursera Project in Developing Data Products",
+    "created" : 1463974787503.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3727826831",
+    "id" : "B5C5379B",
+    "lastKnownWriteTime" : 1463980013,
+    "path" : "G:/John Hopkins Data Science Specialization Coursera/Developing Data Products/Course Project/about.md",
+    "project_path" : "about.md",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "markdown"
+}

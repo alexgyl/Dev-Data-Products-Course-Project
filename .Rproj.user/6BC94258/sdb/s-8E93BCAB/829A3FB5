@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(fluidPage(\n  \n  # Application title\n  headerPanel(\"To Default or Not to Default?\"),\n  mainPanel(\n    tabsetPanel(\n      \n      tabPanel(\"Data\",\n               dataTableOutput(\"data\")\n      ),\n      \n      tabPanel(\"Histogram\",\n               # Select box for variable selection \n               selectInput(\"select\", label = h3(\"Select box\"), \n                           choices = list(\"Balance\" = 1, \"Income\" = 2), \n                           selected = 1),\n               \n               \n               # Sidebar with a slider input for number of bins\n               sidebarLayout(\n                 sidebarPanel(\n                   sliderInput(\"bins\",\n                               \"Number of bins:\",\n                               min = 1,\n                               max = 50,\n                               value = 30)\n                 ),\n                 \n                 # Show a plot of the generated distribution\n                 mainPanel(\n                   plotOutput(\"distPlot\")\n                 )\n               )\n      ),\n      \n      tabPanel(\"Model\",\n               # Numeric input for training set size\n               numericInput(\"portion\", label = h3(\"Choose Training Set Size (%)\"), value = 60,min = 0, max = 99),\n               # Group of checkboxes to select variables\n               \n               checkboxGroupInput(\"variables\", label = h3(\"Select Variables:\"), \n                                  choices = c(\"Student\" = \"student\", \"Balance\" = \"balance\", \"Income\" = \"income\"),\n                                  selected = \"income\"),\n               # Reactive action button\n               actionButton(\"exec\", \"Run\"),\n               # Outputs for variables used, confusion matrix and model metrics\n               textOutput(\"vars\"),\n               tableOutput(\"table\"),\n               tableOutput(\"sens\")\n      ),\n      tabPanel(\"About\",\n               mainPanel(\n                 includeMarkdown(\"about.md\")\n               )\n      )\n    )\n  )\n))\n",
+    "created" : 1463667616971.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2215891535",
+    "id" : "829A3FB5",
+    "lastKnownWriteTime" : 1463979760,
+    "path" : "G:/John Hopkins Data Science Specialization Coursera/Developing Data Products/Course Project/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
