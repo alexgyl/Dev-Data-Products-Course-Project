@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\nlibrary(ISLR)\nlibrary(caret)\nlibrary(e1071)\n\nshinyServer(function(input, output) {\n  data(Default)\n  \n  output$distPlot <- renderPlot({\n    \n    # generate bins based on input$bins from ui.R\n    # You can access the value of the widget with input$select, e.g.\n    # Selecting which histogram to view\n    if(input$select == 1){\n      var = \"balance\"\n    }\n    else{\n      var = \"income\"\n    }\n    x    <- Default[,var]\n    bins <- seq(min(x), max(x), length.out = input$bins + 1)\n    \n    # draw the histogram with the specified number of bins\n    hist(x, breaks = bins, col = 'blue', border = 'white', main = paste(\"Histogram of\", var), xlab = var)\n    \n  })\n  \n  # Display the data table for the \"Default\" data set from ISLR\n  output$data = renderDataTable(Default)\n  # Reactive input from the push button\n  finalRes = eventReactive(input$exec,{\n    set.seed(1234)\n    # Choosing data proportioning size\n    prob = input$portion/100\n    trainIn = createDataPartition(Default$default, p = prob, list = FALSE) \n    train = Default[trainIn,]\n    test = Default[-trainIn,]\n    # Creation of model\n    finalTrain = train[,c(input$variables,\"default\")]\n    finalTest = test[,c(input$variables,\"default\")]\n    model = train(default~., method = \"glm\",data = finalTrain)\n    predictions = predict(object = model, finalTest)\n    output$vars = renderText({paste(\"Confusion Matrix for Logisitic Regression of the variables:\", paste(input$variables,sep = \"\", collapse = \", \"))})\n    output$sens = renderTable({as.table(confusionMatrix(predictions,finalTest$default)$byClass)})\n    confusionMatrix(predictions,finalTest$default)$table\n    \n  })\n  # Render table outputs for confusion matrix\n  output$table = renderTable({finalRes()})\n  \n})\n",
+    "created" : 1463667617111.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3574955948",
+    "id" : "52283BA6",
+    "lastKnownWriteTime" : 1463934846,
+    "path" : "G:/John Hopkins Data Science Specialization Coursera/Developing Data Products/Course Project/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

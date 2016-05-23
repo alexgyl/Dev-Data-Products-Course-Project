@@ -1,0 +1,17 @@
+{
+    "contents" : "---\n\n##\ntitle       : Developing Data Products Course Project\nsubtitle    : Predicting Credit Defaulters\nauthor      : Goh Yong Liang\njob         : \nframework   : io2012   # {io2012, html5slides, shower, dzslides, ...}\nhighlighter : highlight.js  # {highlight.js, prettify, highlight}\nhitheme     : tomorrow      # \nwidgets     : []            # {mathjax, quiz, bootstrap}\nmode        : selfcontained # {standalone, draft}\nknit        : slidify::knit2slides\n\n---\n\n## Introduction\n\nThis Shiny application was developed for the \"Developing Data Products\" Coursera course as part of the Johns Hopkins University Data Science Specialization.\n\nThis app enables a user to easily explore and develop simple logistic regression models for the \"Default\" data set found in the ISLR package. This is a simulated data set which aims to predict which customers will default on their credit card debt; it contains the variables, `income`, `student` and `balance`. These variables can be used to predict the outcome given in `default`.\n\nThe app contains 3 main functions: Data, Histogram and Model.\n\nClick on the following link to access the app: https://legoh.shinyapps.io/myapp/\n\n--- .class #id \n\n## Data \n\nThe data set used in this application is given as follows:\n```{r,warning=FALSE}\nlibrary(ISLR);data(Default);head(Default)\n```\n\n---\n\n## Histogram\n\nThe histogram allows for the user to select which variable, `income` or `balance` to plot a histogram on. It is controlled mainly by the following function:\n```{r, message=FALSE, fig.width = 5, fig.height = 5}\nhist(Default$income, breaks = 30, col = 'blue', border = 'white', \n     main = \"Histogram of income\",xlab = \"income\")\n```\n\n---\n\n## Model\n\nThe modeling technique used for this app is a simple logistic regression model. It is run by the \"glm\" method in the caret package. The user is allowed to choose the training data set size as well as the variables used. The output of the model will be the confusion matrix and model metrics.\n```{r, message = FALSE, echo=FALSE, warning=FALSE}\nlibrary(caret)\nset.seed(1234)\ntrainIn = createDataPartition(Default$default, p = 0.6, list = FALSE) \ntrain = Default[trainIn,]\ntest = Default[-trainIn,]\nmodel = train(default~., method = \"glm\",data = train)\npredictions = predict(object = model, test)\nconfusionMatrix(predictions,test$default)$byClass\nconfusionMatrix(predictions,test$default)$table\n```\n\n\n\n\n",
+    "created" : 1463991615422.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4205664305",
+    "id" : "87611F81",
+    "lastKnownWriteTime" : 1463992046,
+    "path" : "G:/John Hopkins Data Science Specialization Coursera/Developing Data Products/Course Project/courseproj/index.Rmd",
+    "project_path" : "courseproj/index.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}
